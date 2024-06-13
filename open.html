@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loader Animation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+        html, body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+            background-color: #FFFFFF;
+            margin: 0;
+        }
+
+        .loader {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .loader .section {
+            width: 5px;
+            height: 10px;
+            background-color: rgba(255, 255, 255, .075);
+            border-radius: 2px;
+        }
+
+        @keyframes rotate {
+            from {
+                background-color: #F09;
+            }
+            to {
+                background-color: rgba(255, 255, 255, .075);
+            }
+        }
+
+        .path {
+            position: absolute;
+            font-size: 32px;
+            font-family: 'Bebas Neue', sans-serif;
+            width: 275px;
+            text-align: center;
+        }
+
+        .holder p {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="loader">
+        -45.times do |index|
+            <div class="section section#{index}"></div>
+        .holder
+            -['G', 'N', 'I', 'D', 'A', 'O', 'L'].each_with_index do |i, idx|
+                <p class="p#{idx+1}">#{i}</p>
+    </div>
+    <div class="path">LOADING</div>
+
+    <script>
+        const loader = document.querySelector('.loader');
+        for (let index = 0; index < 45; index++) {
+            const section = document.createElement('div');
+            section.className = `section section${index}`;
+            section.style.position = 'absolute';
+            section.style.transform = `rotate(${8 * index}deg) translate(0, -45px)`;
+            section.style.animation = `rotate 2.5s ease infinite`;
+            section.style.animationFillMode = 'forwards';
+            section.style.animationDelay = `${0.055 * index}s`;
+            loader.appendChild(section);
+        }
+
+        const holder = document.createElement('div');
+        holder.className = 'holder';
+        ['G', 'N', 'I', 'D', 'A', 'O', 'L'].forEach((i, idx) => {
+            const p = document.createElement('p');
+            p.className = `p${idx + 1}`;
+            p.textContent = i;
+            holder.appendChild(p);
+        });
+        loader.appendChild(holder);
+    </script>
+</body>
+</html>
